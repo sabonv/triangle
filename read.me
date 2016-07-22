@@ -6,10 +6,48 @@ String arg1 = args[0]; получение аргумента
 Run->Edit config...  задать параметры для запуска в тесте
 
 в своействах проекта вкладка Artifacts указать стартовый мэйн с полным путём в СРЦ
-*тамже ант
+
+
+
+
  
-1) Компиляция програмы через ANT
+1) Компиляция програмы через ANT(https://www.youtube.com/watch?v=_5wWYmjgwNQ)(http://www.javaportal.ru/articles/ant10step.html)
+
+Окно анта справа "Ant Builder"
+создаётся файл xml, закидывается в это окно, и редактируется. в этом же окне запускается.
+
+Проэкт
+	имя - имя
+	бейс дир - бейс дир, относительно этой директории всё ищется, если пустое дир файла, если ".." то выше на один уровень
+	дефаулт - имя таргета которыый запустится если натравить Ант на директорию с файлом анта
+Таргет
+	depends - таргет который надо запустить перед запуском текущего таргета.
+	
+Таск
+есть таск манефеста...	
+фильтры - одновременно плохо, что то одно лучше
+<include name="**/*.class"/>
+<exclude name="**/CVS"/>
+	
+Проперти
+пишутся в теле проэкта, выглядит как <property name="sourcdir" location="../src"/>
+как используется ${src}
+системная переменная пример: ${ant.file}
+
+Идиалогия анта: сначало разбить на задачи, написать таргеты, расставить зависимости, заполнить таргеты, указать дефолтный(стартовый) таргет в проджекте
+
+
+
 2) Время работы програмы и размер хипа
+
+    public static void GetHeapSize(){
+//Get the jvm heap size.
+            long heapSize = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+//Print the jvm heap size.
+            System.out.println("Heap Size(KB) = " + heapSize/1024);
+        }
+
+
 +3) Запуск с параметром
 4) Сканирование дириктории на наличие файлов 
 5) Побайтное чтение файла
@@ -58,4 +96,35 @@ Run->Edit config...  задать параметры для запуска в т
 2) Отобразить время работы программы и размер хипа после выполнения (записать в файл или вывести в Sysout)
 
 Исходный код должен собираться через ant с командной строки.
+
+-----------------------------------------------пример антовского билдера-----------------------------------
+<project name="Ant Test build JAR" default="all" basedir="">
+
+<target name="make.dirs" description="Make some dirs">
+    <echo>Make temp dir</echo>
+    <mkdir dir="build"/>
+    <mkdir dir="build/class"/>
+</target>
+
+<target name="compile" description="compile java" depends="make.dirs">
+    <echo>I'm building my software with help Ant</echo>
+    <javac destdir="build/class">
+        <src path="../src"/>
+    </javac>
+</target>
+
+<target name="MyFirstLab.jar" description="make jar file" depends="compile">
+    <echo>I'm building my software with help Ant</echo>
+    <jar destfile="build/MyFirstLab.jar" manifest="../src/META-INF/MANIFEST.MF">
+        <fileset dir="build/class">
+            <include name="**/*.class"/>
+            <exclude name="**/CVS"/>
+        </fileset>
+    </jar>
+</target>
+
+<target name="all" description="Do the build" depends="MyFirstLab.jar"/>
+</project>
+----------------------------------------------------------------------------------------------------------
+
 */
