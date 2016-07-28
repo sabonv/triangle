@@ -79,18 +79,31 @@ public class Main {
                 int tempread;
                 ArrayList<Integer> temp = new ArrayList<>();
 
-                in.skip(1);
+                int sum = 0;
+                int count = 0;
+
+                //in.skip(1);
                 while ((tempread = in.read()) != -1) {
-                    if(tempread==3&&temp.size()==3){
-                        result.add(new ArrayList<Integer>(temp));
-                        temp.clear();
-                    }
-                    else {
 
-                        temp.add(tempread);
+                    if(tempread==3){
+                        for (int i = 0; i < 3; i++) {
+                            if((tempread = in.read()) != -1) temp.add(tempread);
 
+                        }
+                        for(Integer x: temp) sum = sum+x;
+                        if (sum==180 && temp.size()==3) {
+                            result.add(new ArrayList<Integer>(temp));
+
+                            sum = 0;
+                            temp.clear();
+                            count++;
+
+                        }
                     }
+
                 }
+                System.out.println(count);
+
             }
             catch (Exception e){
                 System.out.println("ReadFiles error " + e.getMessage());
@@ -114,16 +127,7 @@ public class Main {
                     ArrayList<Integer> a = X.get(j);
                     ArrayList<Integer> b = X.get(j+1);
 
-                    if(n==0 || n==2&&a.get(n-1)==b.get(n-1)&&a.get(n-2)==b.get(n-2)) {
-
-                        if (a.get(n) < b.get(n)) {
-                            ArrayList<Integer> temp = X.get(j + 1);
-                            X.set(j+1, X.get(j));
-                            X.set(j, temp);
-                        }
-
-                    }
-                    if(n==1&&a.get(n-1)==b.get(n-1)) {
+                    if(n==0 || n==2&&a.get(n-1)==b.get(n-1)&&a.get(n-2)==b.get(n-2)||n==1&&a.get(n-1)==b.get(n-1)) {
 
                         if (a.get(n) > b.get(n)) {
                             ArrayList<Integer> temp = X.get(j + 1);
@@ -132,6 +136,7 @@ public class Main {
                         }
 
                     }
+
 
                 }
             }
