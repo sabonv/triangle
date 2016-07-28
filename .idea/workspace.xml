@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59fb4f6b-1803-4da6-af6c-85085f063746" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ant/antbuilder/Triangle.jar" afterPath="$PROJECT_DIR$/ant/antbuilder/Triangle.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ant/antbuilder/class/Main/Main.class" afterPath="$PROJECT_DIR$/ant/antbuilder/class/Main/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ant/antbuilder.xml" afterPath="$PROJECT_DIR$/ant/antbuilder.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/Main.java" afterPath="$PROJECT_DIR$/src/Main/Main.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source file/List.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source file/Out_result.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source file/test_file_1.blob" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source file/test_file_2.blob" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source file/test_file_3.blob" afterPath="" />
     </list>
     <ignored path="triangle.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,7 +27,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="antbuilder.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="antbuilder.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ant/antbuilder.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
@@ -37,10 +37,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
+            <state relative-caret-position="493">
               <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding>
                 <element signature="method#ReadFiles#0;class#Main#0" expanded="false" />
@@ -607,17 +607,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ant/antbuilder.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
+        <state relative-caret-position="493">
           <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
             <element signature="method#ReadFiles#0;class#Main#0" expanded="false" />
@@ -625,6 +617,14 @@
             <element signature="method#outresult#0;class#Main#0" expanded="false" />
             <element signature="method#OutHeapSize#0;class#Main#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ant/antbuilder.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
