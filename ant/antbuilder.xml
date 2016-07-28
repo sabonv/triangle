@@ -1,0 +1,27 @@
+<project name="Triangle" default="start" basedir="">
+
+    <property name="src" location="../src"/>
+
+    <target name="make.dirs">
+        <mkdir dir="antbuilder"/>
+        <mkdir dir="antbuilder/class"/>
+    </target>
+
+    <target name="compile" depends="make.dirs">
+        <javac destdir="antbuilder/class">
+            <src path="${src}"/>
+        </javac>
+    </target>
+
+    <target name="make.JAR" depends="compile">
+        <jar destfile="antbuilder/Triangle.jar" manifest="${src}/META-INF/MANIFEST.MF">
+            <fileset dir="antbuilder/class">
+                <include name="*/*.*class"/>
+            </fileset>
+        </jar>
+
+    </target>
+
+    <target name="start" depends="make.JAR"/>
+
+</project>
