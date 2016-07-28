@@ -11,9 +11,7 @@ public class Main {
     try {
         long starttime = System.currentTimeMillis();
 
-
-        String sourcedir = args[0];
-        if(!sourcedir.endsWith("\\")) sourcedir = sourcedir + "\\";
+        String sourcedir = argstest(args[0]);
 
         ArrayList<FileInputStream> files = new ArrayList<>(ScanDir(sourcedir));
 
@@ -29,8 +27,24 @@ public class Main {
     }
 
     catch (Exception e){
+        System.out.println("Error main ");
         System.out.println(e.getMessage());
+
     }
+
+    }
+
+    public static String argstest(String args) throws Exception{
+
+        String result = args;
+
+        if(result.substring(0,1).equals("\"")) result = result.substring(1,result.length());
+        if(result.substring(result.length()-1, result.length()).equals("\"")) result = result.substring(0,result.length()-1);
+        if(!result.endsWith("\\")) result = result + "\\";
+
+        File dir = new File(result);
+        if (dir.exists()) return result;
+        else throw new Exception("Directory not found: " + result);
 
     }
 
@@ -77,6 +91,9 @@ public class Main {
 
                     }
                 }
+            }
+            catch (Exception e){
+                System.out.println("ReadFiles error " + e.getMessage());
             }
             finally {
                 if(in != null) in.close();
@@ -136,6 +153,9 @@ public class Main {
                 out.println("");
 
             }
+        }
+        catch (Exception e){
+            System.out.println("outresult error "+ e.getMessage());
         }
         finally {
             if(out != null) out.close();
