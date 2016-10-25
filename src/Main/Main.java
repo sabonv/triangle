@@ -3,12 +3,18 @@ package Main;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
 	// write your code here
     try {
+
+        Properties p = System.getProperties();
+        System.out.println("Separator: " +
+                p.getProperty("file.separator"));
+
         long starttime = System.currentTimeMillis();
 
         String sourcedir = argstest(args[0]);
@@ -24,6 +30,8 @@ public class Main {
         OutHeapSize();
 
         System.out.println("Time of work(ms) " + (System.currentTimeMillis() - starttime));
+
+
     }
 
     catch (Exception e){
