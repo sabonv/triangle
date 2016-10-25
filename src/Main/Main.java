@@ -88,9 +88,9 @@ public class Main {
                 ArrayList<Integer> temp = new ArrayList<>();
 
                 int sum = 0;
-                int count = 0;
+                int count = 0, err = 0;
 
-                //in.skip(1);
+
                 while ((tempread = in.read()) != -1) {
 
                     if(tempread==3){
@@ -107,10 +107,16 @@ public class Main {
                             count++;
 
                         }
+                        else {
+
+                            sum = 0;
+                            temp.clear();
+                        }
                     }
 
+
                 }
-                System.out.println(count);
+
 
             }
             catch (Exception e){
