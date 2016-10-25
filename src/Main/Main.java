@@ -88,8 +88,7 @@ public class Main {
                 ArrayList<Integer> temp = new ArrayList<>();
 
                 int sum = 0;
-                int count = 0, err = 0;
-
+                //int count = 0, err = 0;
 
                 while ((tempread = in.read()) != -1) {
 
@@ -104,19 +103,15 @@ public class Main {
 
                             sum = 0;
                             temp.clear();
-                            count++;
-
+                           // count++;
                         }
                         else {
-
                             sum = 0;
                             temp.clear();
                         }
                     }
 
-
                 }
-
 
             }
             catch (Exception e){
@@ -127,6 +122,7 @@ public class Main {
             }
 
         }
+        System.out.println("Triangles found = " + result.size());
         return result;
     }
 
