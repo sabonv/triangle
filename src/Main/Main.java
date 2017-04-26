@@ -19,9 +19,40 @@ public class Main {
 
         String sourcedir = argstest(args[0]);
 
+        ArrayList<Reader> arrread = new ArrayList<Reader>();
+
+        List<ArrayList<Integer>> alltr = new ArrayList<>();
+
         ArrayList<FileInputStream> files = new ArrayList<>(ScanDir(sourcedir));
 
-        List<ArrayList<Integer>> alltr = new ArrayList<>(ReadFiles(files));
+// "читаем файлы" создаём массив с объектами паралельными потоками
+
+        for (int i = 0; i < files.size(); i++) {
+            arrread.add(new Reader("file"+i, files.get(i)));
+        }
+
+// джойним потоки к основному потоку
+
+        for (int i = 0; i < arrread.size(); i++) {
+            arrread.get(i).getP().join();
+        }
+
+        System.out.println("All Thread end");
+
+//сливаем результаты в один массив
+
+        for (int i = 0; i < arrread.size(); i++) {
+
+            List<ArrayList<Integer>> tempsors = arrread.get(i).getResult();
+            int sizep = arrread.get(i).getSize();
+            if (i==0) sizep=0;
+            System.arraycopy(tempsors, 0, alltr, sizep, tempsors.size());
+
+        }
+
+
+
+//        List<ArrayList<Integer>> alltr = new ArrayList<>(ReadFiles(files));
 
         List<ArrayList<Integer>> sorttr = new ArrayList<>(SortA(alltr));
 

@@ -1,0 +1,130 @@
+java/openjdk8 >> java/openjdk7 >> print/cups >> net/avahi-app >> devel/gobject-introspection >> graphics/cairo >> graphics/libEGL >> devel/llvm37 (20/83)
+ 
+ CMake Error at cmake/modules/CheckAtomic.cmake:36 (message):
+  Host compiler appears to require libatomic, but cannot find it.
+Call Stack (most recent call first):
+  cmake/config-ix.cmake:291 (include)
+  CMakeLists.txt:360 (include)
+
+ 
+ 
+ -- Configuring incomplete, errors occurred!
+See also "/usr/ports/devel/llvm37/work/.build/CMakeFiles/CMakeOutput.log".
+See also "/usr/ports/devel/llvm37/work/.build/CMakeFiles/CMakeError.log".
+*** [do-configure] Error code 1
+
+Stop in /usr/ports/devel/llvm37.
+*** [build] Error code 1
+
+Stop in /usr/ports/devel/llvm37.
+
+===>>> make build failed for devel/llvm37
+===>>> Aborting update
+
+===>>> Update for devel/llvm37 failed
+===>>> Aborting update
+
+===>>> Update for graphics/libEGL failed
+===>>> Aborting update
+
+===>>> Update for graphics/cairo failed
+===>>> Aborting update
+
+===>>> Update for devel/gobject-introspection failed
+===>>> Aborting update
+
+===>>> Update for net/avahi-app failed
+===>>> Aborting update
+
+===>>> Update for print/cups failed
+===>>> Aborting update
+
+===>>> Update for java/openjdk7 failed
+===>>> Aborting update
+
+===>>> There are messages from installed ports to display,
+       but first take a moment to review the error messages
+       above.  Then press Enter when ready to proceed.
+
+
+
+Always:
+======================================================================
+
+WARNING: This port only exists for bootstrapping java/openjdk[67].
+You are advised to remove this port as soon as a stable JDK is built.
+
+This OpenJDK implementation requires fdescfs(5) mounted on /dev/fd and
+procfs(5) mounted on /proc.
+
+If you have not done it yet, please do the following:
+
+        mount -t fdescfs fdesc /dev/fd
+        mount -t procfs proc /proc
+
+To make it permanent, you need the following lines in /etc/fstab:
+
+        fdesc   /dev/fd         fdescfs         rw      0       0
+        proc    /proc           procfs          rw      0       0
+
+======================================================================
+
+===>>> pkg-message for python27-2.7.12
+Always:
+===========================================================================
+
+Note that some standard Python modules are provided as separate ports
+as they require additional dependencies. They are available as:
+
+bsddb           databases/py-bsddb
+gdbm            databases/py-gdbm
+sqlite3         databases/py-sqlite3
+tkinter         x11-toolkits/py-tkinter
+
+===========================================================================
+
+===>>> Done displaying pkg-message files
+
+===>>> The following actions were performed:
+        Installation of audio/alsa-lib (alsa-lib-1.1.2)
+        Installation of devel/p5-Locale-gettext (p5-Locale-gettext-1.06)
+        Installation of misc/help2man (help2man-1.43.3_1)
+        Installation of devel/autoconf-wrapper (autoconf-wrapper-20131203)
+        Installation of devel/autoconf (autoconf-2.69_1)
+        Installation of graphics/giflib (giflib-5.1.4)
+        Installation of java/java-zoneinfo (java-zoneinfo-2016.g)
+        Installation of java/bootstrap-openjdk (bootstrap-openjdk-r351880_1)
+        Installation of devel/pcre (pcre-8.39)
+        Installation of lang/python27 (python27-2.7.12)
+        Installation of devel/glib20 (glib-2.46.2_3)
+        Installation of devel/libdevq (libdevq-0.0.2_1)
+        Installation of devel/libpthread-stubs (libpthread-stubs-0.3_6)
+
+
+===>>> You can restart from the point of failure with this command line:
+       portmaster <flags> java/openjdk8 java/javavmwrapper java/openjdk7 print/cups net/avahi-app devel/gobject-introspection graphics/cairo graphics/libEGL devel/llvm37 graphics/gbm graphics/libdrm devel/libpciaccess devel/xorg-macros misc/pciids graphics/libglapi lang/python2 x11/dri2proto x11/glproto x11/libX11 x11-fonts/xf86bigfontproto x11/bigreqsproto x11/inputproto x11/kbproto x11/libXau x11/xproto x11/libXdmcp x11/libxcb devel/libcheck textproc/libxml2 textproc/libxslt security/libgcrypt security/libgpg-error x11/xcb-proto x11/xcmiscproto x11/xextproto x11/xtrans x11/libXdamage x11/damageproto x11/fixesproto x11/libXfixes x11/libXext x11/libXvMC x11/libXv x11/videoproto x11/libxshmfence x11/presentproto graphics/libGL x11/libXxf86vm x11/xf86vidmodeproto graphics/png print/freetype2 x11-fonts/fontconfig x11/libXrender x11/renderproto x11/pixman security/gnutls dns/libidn security/libtasn1 security/nettle security/p11-kit security/trousers devel/libtool emulators/tpm-emulator x11-fonts/dejavu x11-fonts/mkfontdir x11-fonts/mkfontscale x11-fonts/libfontenc x11-toolkits/libXt x11/libXi x11/libXtst x11/recordproto
+
+	   
+	   
+	   
+	   
+	   /usr/ports/devel/llvm37 portmanager
+	   
+
+-- Configuring incomplete, errors occurred!
+See also "/usr/ports/devel/llvm37/work/.build/CMakeFiles/CMakeOutput.log".
+See also "/usr/ports/devel/llvm37/work/.build/CMakeFiles/CMakeError.log".
+*** [do-configure] Error code 1
+
+Stop in /usr/ports/devel/llvm37.
+*** [build] Error code 1
+
+Stop in /usr/ports/devel/llvm37.
+
+===>>> make build failed for devel/llvm37
+===>>> Aborting update
+
+
+===>>> You can restart from the point of failure with this command line:
+       portmaster <flags> devel/llvm37
+
