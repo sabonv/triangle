@@ -11,16 +11,26 @@ import java.util.List;
 public class Reader implements Runnable  {
 
     private Thread p;
-    private List<ArrayList<Integer>> result;
+    private List<ArrayList<Integer>> result = new ArrayList<>();
     private FileInputStream in;
     private int size;
 
-    Reader (String name, FileInputStream instream){
+    Reader (String name, String filesors){
         super();
-        this.in = instream;
+        try {
+            this.in = new FileInputStream(filesors);
+        }catch (Exception e){
+            System.out.println("Error find file in thread" + e);
+        }
         p = new Thread(Thread.currentThread().getThreadGroup(), this, name);
         p.start();
-        System.out.println("Thread " + p.getName() + " started");
+        if (p.isAlive()) {
+            System.out.println("Thread " + p.getName() + " started");
+        }
+        else {
+            System.out.println("Huy vam a ne potok " + p.getName());
+        }
+
 
     }
 
@@ -45,11 +55,12 @@ public class Reader implements Runnable  {
             int sum = 0;
             //int count = 0, err = 0;
 
-            while ((tempread = in.read()) != -1) {
+            while ((tempread = this.in.read()) != -1) {
 
                 if(tempread==3){
+
                     for (int i = 0; i < 3; i++) {
-                        if((tempread = in.read()) != -1) temp.add(tempread);
+                        if((tempread = this.in.read()) != -1) temp.add(tempread);
 
                     }
                     for(Integer x: temp) sum = sum+x;
@@ -70,17 +81,18 @@ public class Reader implements Runnable  {
 
         }
         catch (Exception e){
-            System.out.println("ReadFiles error " + e.getMessage());
+            System.out.println("ReadFiles error " + e);
         }
         finally {
 
             try {
-                if (in != null) in.close();
+                if (this.in != null) this.in.close();
             }catch (Exception e) {
                 System.out.println(e.getMessage());
             }
 
         }
         this.size = result.size();
+
     }
 }

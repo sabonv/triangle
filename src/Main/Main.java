@@ -1,9 +1,7 @@
 package Main;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class Main {
 
@@ -23,12 +21,14 @@ public class Main {
 
         List<ArrayList<Integer>> alltr = new ArrayList<>();
 
-        ArrayList<FileInputStream> files = new ArrayList<>(ScanDir(sourcedir));
+       //ArrayList<FileInputStream> files = new ArrayList<>(ScanDir(sourcedir));
+
+        ArrayList<String> filesn = new ArrayList<>(ScanDir(sourcedir));
 
 // "читаем файлы" создаём массив с объектами паралельными потоками
 
-        for (int i = 0; i < files.size(); i++) {
-            arrread.add(new Reader("file"+i, files.get(i)));
+        for (int i = 0; i < filesn.size(); i++) {
+            arrread.add(new Reader("file"+i, sourcedir + filesn.get(i)));
         }
 
 // джойним потоки к основному потоку
@@ -44,9 +44,9 @@ public class Main {
         for (int i = 0; i < arrread.size(); i++) {
 
             List<ArrayList<Integer>> tempsors = arrread.get(i).getResult();
-            int sizep = arrread.get(i).getSize();
-            if (i==0) sizep=0;
-            System.arraycopy(tempsors, 0, alltr, sizep, tempsors.size());
+
+            alltr.addAll(tempsors.subList(0,tempsors.size()));
+
 
         }
 
@@ -66,7 +66,7 @@ public class Main {
     }
 
     catch (Exception e){
-        System.out.println("Error main ");
+        System.out.println("Error main " + e);
         System.out.println(e.getMessage());
 
     }
@@ -87,75 +87,76 @@ public class Main {
 
     }
 
-    public static ArrayList<FileInputStream> ScanDir(String sourcedir)throws IOException{
+    public static ArrayList<String> ScanDir(String sourcedir)throws IOException{
 
-            ArrayList<FileInputStream> result = new ArrayList<>();
-            File dir = new File(sourcedir);
+        //ArrayList<FileInputStream> result = new ArrayList<>();
+        //ArrayList<String> result = new ArrayList<>();
+        File dir = new File(sourcedir);
 
-            String[] names = dir.list(new FilenameFilter() {
+        String[] names = dir.list(new FilenameFilter() {
 
-                public boolean accept(File dir, String name) {
-                    String f = new File(name).getName();
-                    return f.endsWith(".blob");
-
+            public boolean accept(File dir, String name) {
+                String f = new File(name).getName();
+                return f.endsWith(".blob");
                 }
-            });
+        });
+        ArrayList<String> result = new ArrayList<>(Arrays.asList(names));
 
-            for (String file : names) {
-                result.add(new FileInputStream(sourcedir + file));
-            }
+//            for (String file : names) {
+//                result.add(new FileInputStream(sourcedir + file));
+//            }
 
         return result;
     }
 
-    public static List<ArrayList<Integer>> ReadFiles(ArrayList<FileInputStream> inarr) throws IOException{
-
-        List<ArrayList<Integer>> result = new ArrayList<>();
-
-        for (FileInputStream in : inarr){
-
-            try {
-                int tempread;
-                ArrayList<Integer> temp = new ArrayList<>();
-
-                int sum = 0;
-                //int count = 0, err = 0;
-
-                while ((tempread = in.read()) != -1) {
-
-                    if(tempread==3){
-                        for (int i = 0; i < 3; i++) {
-                            if((tempread = in.read()) != -1) temp.add(tempread);
-
-                        }
-                        for(Integer x: temp) sum = sum+x;
-                        if (sum==180 && temp.size()==3) {
-                            result.add(new ArrayList<Integer>(temp));
-
-                            sum = 0;
-                            temp.clear();
-                           // count++;
-                        }
-                        else {
-                            sum = 0;
-                            temp.clear();
-                        }
-                    }
-
-                }
-
-            }
-            catch (Exception e){
-                System.out.println("ReadFiles error " + e.getMessage());
-            }
-            finally {
-                if(in != null) in.close();
-            }
-
-        }
-        System.out.println("Triangles found = " + result.size());
-        return result;
-    }
+//    public static List<ArrayList<Integer>> ReadFiles(ArrayList<FileInputStream> inarr) throws IOException{
+//
+//        List<ArrayList<Integer>> result = new ArrayList<>();
+//
+//        for (FileInputStream in : inarr){
+//
+//            try {
+//                int tempread;
+//                ArrayList<Integer> temp = new ArrayList<>();
+//
+//                int sum = 0;
+//                //int count = 0, err = 0;
+//
+//                while ((tempread = in.read()) != -1) {
+//
+//                    if(tempread==3){
+//                        for (int i = 0; i < 3; i++) {
+//                            if((tempread = in.read()) != -1) temp.add(tempread);
+//
+//                        }
+//                        for(Integer x: temp) sum = sum+x;
+//                        if (sum==180 && temp.size()==3) {
+//                            result.add(new ArrayList<Integer>(temp));
+//
+//                            sum = 0;
+//                            temp.clear();
+//                           // count++;
+//                        }
+//                        else {
+//                            sum = 0;
+//                            temp.clear();
+//                        }
+//                    }
+//
+//                }
+//
+//            }
+//            catch (Exception e){
+//                System.out.println("ReadFiles error " + e.getMessage());
+//            }
+//            finally {
+//                if(in != null) in.close();
+//            }
+//
+//        }
+//        System.out.println("Triangles found = " + result.size());
+//        return result;
+//    }
 
     public static List<ArrayList<Integer>> SortA(List<ArrayList<Integer>> X) throws IOException {
 
