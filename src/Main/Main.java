@@ -6,22 +6,25 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-	// write your code here
+
+
     try {
 
-        Properties p = System.getProperties();
-        System.out.println("Separator: " +
-                p.getProperty("file.separator"));
+//        Properties p = System.getProperties();
+//        System.out.println("Separator: " +
+//                p.getProperty("file.separator"));
 
         long starttime = System.currentTimeMillis();
-
-        String sourcedir = argstest(args[0]);
 
         ArrayList<Reader> arrread = new ArrayList<Reader>();
 
         List<ArrayList<Integer>> alltr = new ArrayList<>();
 
-       //ArrayList<FileInputStream> files = new ArrayList<>(ScanDir(sourcedir));
+//берём директорию с файлами из параметров запуска
+
+        String sourcedir = argstest(args[0]);
+
+//сканим директорию на наличие нужных файлов
 
         ArrayList<String> filesn = new ArrayList<>(ScanDir(sourcedir));
 
@@ -36,37 +39,31 @@ public class Main {
         for (int i = 0; i < arrread.size(); i++) {
             arrread.get(i).getP().join();
         }
-
-        System.out.println("All Thread end");
-
+        System.out.println("Time(ms) of work (Thread end) = " + (System.currentTimeMillis() - starttime));
 //сливаем результаты в один массив
 
         for (int i = 0; i < arrread.size(); i++) {
-
             List<ArrayList<Integer>> tempsors = arrread.get(i).getResult();
-
             alltr.addAll(tempsors.subList(0,tempsors.size()));
-
-
         }
-
-
-
-//        List<ArrayList<Integer>> alltr = new ArrayList<>(ReadFiles(files));
+        System.out.println("Time(ms) of work (All in one array) = " + (System.currentTimeMillis() - starttime));
+//сортируем общий массив
 
         List<ArrayList<Integer>> sorttr = new ArrayList<>(SortA(alltr));
+
+///сохраняем результаты сортировки в файл
 
         outresult(sorttr, sourcedir);
 
         OutHeapSize();
 
-        System.out.println("Time of work(ms) " + (System.currentTimeMillis() - starttime));
+        System.out.println("Time(ms) of work (Main) = " + (System.currentTimeMillis() - starttime));
 
 
     }
 
     catch (Exception e){
-        System.out.println("Error main " + e);
+        System.out.println("Error main: " + e);
         System.out.println(e.getMessage());
 
     }
@@ -109,62 +106,15 @@ public class Main {
         return result;
     }
 
-//    public static List<ArrayList<Integer>> ReadFiles(ArrayList<FileInputStream> inarr) throws IOException{
-//
-//        List<ArrayList<Integer>> result = new ArrayList<>();
-//
-//        for (FileInputStream in : inarr){
-//
-//            try {
-//                int tempread;
-//                ArrayList<Integer> temp = new ArrayList<>();
-//
-//                int sum = 0;
-//                //int count = 0, err = 0;
-//
-//                while ((tempread = in.read()) != -1) {
-//
-//                    if(tempread==3){
-//                        for (int i = 0; i < 3; i++) {
-//                            if((tempread = in.read()) != -1) temp.add(tempread);
-//
-//                        }
-//                        for(Integer x: temp) sum = sum+x;
-//                        if (sum==180 && temp.size()==3) {
-//                            result.add(new ArrayList<Integer>(temp));
-//
-//                            sum = 0;
-//                            temp.clear();
-//                           // count++;
-//                        }
-//                        else {
-//                            sum = 0;
-//                            temp.clear();
-//                        }
-//                    }
-//
-//                }
-//
-//            }
-//            catch (Exception e){
-//                System.out.println("ReadFiles error " + e.getMessage());
-//            }
-//            finally {
-//                if(in != null) in.close();
-//            }
-//
-//        }
-//        System.out.println("Triangles found = " + result.size());
-//        return result;
-//    }
-
     public static List<ArrayList<Integer>> SortA(List<ArrayList<Integer>> X) throws IOException {
+        long starttime = System.currentTimeMillis();
 
         for (int n = 0; n < 3; n++) {
 
 
             for (int i = X.size() - 1; i > 0; i--) {
                 for (int j = 0; j < i; j++) {
+
 
                     ArrayList<Integer> a = X.get(j);
                     ArrayList<Integer> b = X.get(j+1);
@@ -182,7 +132,8 @@ public class Main {
 
                 }
             }
-
+            System.out.println("Time(ms) sort step " + (n+1) + " = " + (System.currentTimeMillis() - starttime));
+            starttime = System.currentTimeMillis();
         }
 
         return X;

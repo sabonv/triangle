@@ -13,10 +13,11 @@ public class Reader implements Runnable  {
     private Thread p;
     private List<ArrayList<Integer>> result = new ArrayList<>();
     private FileInputStream in;
-    private int size;
+
 
     Reader (String name, String filesors){
         super();
+        long starttime = System.currentTimeMillis();
         try {
             this.in = new FileInputStream(filesors);
         }catch (Exception e){
@@ -24,14 +25,8 @@ public class Reader implements Runnable  {
         }
         p = new Thread(Thread.currentThread().getThreadGroup(), this, name);
         p.start();
-        if (p.isAlive()) {
-            System.out.println("Thread " + p.getName() + " started");
-        }
-        else {
-            System.out.println("Huy vam a ne potok " + p.getName());
-        }
-
-
+//        System.out.println("Thread " + p.getName() + " started");
+        System.out.println("Time(ms) of work (" + p.getName() + ") = " + (System.currentTimeMillis() - starttime));
     }
 
     public Thread getP() {
@@ -40,10 +35,6 @@ public class Reader implements Runnable  {
 
     public List<ArrayList<Integer>> getResult() {
         return result;
-    }
-
-    public int getSize() {
-        return size;
     }
 
     public void run()  {
@@ -92,7 +83,7 @@ public class Reader implements Runnable  {
             }
 
         }
-        this.size = result.size();
+
 
     }
 }
