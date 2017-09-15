@@ -14,24 +14,28 @@ public class Main {
 //        System.out.println("Separator: " +
 //                p.getProperty("file.separator"));
 
+//сохраняем время старта програмы
         long starttime = System.currentTimeMillis();
 
+// создаём массив объектов Reader
         ArrayList<Reader> arrread = new ArrayList<Reader>();
 
+//создаём колекцию для всех треугольников
         List<ArrayList<Integer>> alltr = new ArrayList<>();
 
-//берём директорию с файлами из параметров запуска
+//сканируем адрес директории с файлами из параметров запуска
+//получаем обработаный адрес и список файлов
 
-        String sourcedir = argstest(args[0]);
-
-//сканим директорию на наличие нужных файлов
-
-        ArrayList<String> filesn = new ArrayList<>(ScanDir(sourcedir));
+        ScanDir scan = new ScanDir(args[0]);
+        ArrayList<String> filesn = scan.getFilesn();
+        String sourcedir = scan.getSourcedir();
 
 // "читаем файлы" создаём массив с объектами паралельными потоками
 
         for (int i = 0; i < filesn.size(); i++) {
             arrread.add(new Reader("file"+i, sourcedir + filesn.get(i)));
+            System.out.println("Object "+ i + " done " + "Time is " + (System.currentTimeMillis() - starttime));
+
         }
 
 // джойним потоки к основному потоку
@@ -40,6 +44,7 @@ public class Main {
             arrread.get(i).getP().join();
         }
         System.out.println("Time(ms) of work (Thread end) = " + (System.currentTimeMillis() - starttime));
+
 //сливаем результаты в один массив
 
         for (int i = 0; i < arrread.size(); i++) {
@@ -70,41 +75,9 @@ public class Main {
 
     }
 
-    public static String argstest(String args) throws Exception{
 
-        String result = args;
 
-        if(result.substring(0,1).equals("\"")) result = result.substring(1,result.length());
-        if(result.substring(result.length()-1, result.length()).equals("\"")) result = result.substring(0,result.length()-1);
-        if(!result.endsWith("\\")) result = result + "\\";
 
-        File dir = new File(result);
-        if (dir.exists()) return result;
-        else throw new Exception("Directory not found: " + result);
-
-    }
-
-    public static ArrayList<String> ScanDir(String sourcedir)throws IOException{
-
-        //ArrayList<FileInputStream> result = new ArrayList<>();
-        //ArrayList<String> result = new ArrayList<>();
-        File dir = new File(sourcedir);
-
-        String[] names = dir.list(new FilenameFilter() {
-
-            public boolean accept(File dir, String name) {
-                String f = new File(name).getName();
-                return f.endsWith(".blob");
-                }
-        });
-        ArrayList<String> result = new ArrayList<>(Arrays.asList(names));
-
-//            for (String file : names) {
-//                result.add(new FileInputStream(sourcedir + file));
-//            }
-
-        return result;
-    }
 
     public static List<ArrayList<Integer>> SortA(List<ArrayList<Integer>> X) throws IOException {
         long starttime = System.currentTimeMillis();

@@ -16,8 +16,8 @@ public class Reader implements Runnable  {
 
 
     Reader (String name, String filesors){
-        super();
-        long starttime = System.currentTimeMillis();
+        //super();
+        long starttimep = System.currentTimeMillis();
         try {
             this.in = new FileInputStream(filesors);
         }catch (Exception e){
@@ -26,16 +26,10 @@ public class Reader implements Runnable  {
         p = new Thread(Thread.currentThread().getThreadGroup(), this, name);
         p.start();
 //        System.out.println("Thread " + p.getName() + " started");
-        System.out.println("Time(ms) of work (" + p.getName() + ") = " + (System.currentTimeMillis() - starttime));
+        System.out.println("Time(ms) of work (" + p.getName() + ") = " + (System.currentTimeMillis() - starttimep));
     }
 
-    public Thread getP() {
-        return p;
-    }
 
-    public List<ArrayList<Integer>> getResult() {
-        return result;
-    }
 
     public void run()  {
 
@@ -86,4 +80,13 @@ public class Reader implements Runnable  {
 
 
     }
+
+    public Thread getP() {
+        return p;
+    }
+
+    public List<ArrayList<Integer>> getResult() {
+        return result;
+    }
+
 }
